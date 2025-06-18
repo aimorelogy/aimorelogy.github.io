@@ -1259,6 +1259,12 @@ body {
     text-decoration: underline;
 }
 
+.contact-details address {
+    font-style: normal;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
 /* === CONTACT FORM === */
 .contact-form {
     background: var(--bg-glass);
@@ -1721,6 +1727,13 @@ body {
     .vision-circle i {
         font-size: 2rem;
     }
+    
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-md);
+        align-items: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2083,4 +2096,10 @@ body {
 .toast i { font-size: 1.1rem; }
 @media (max-width: 768px) {
     .toast-container { bottom: var(--space-lg); right: 50%; transform: translateX(50%); }
+}
+
+.footer-section address {
+    font-style: normal;
+    color: var(--text-secondary);
+    line-height: 1.6;
 } 
