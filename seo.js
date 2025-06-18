@@ -4,7 +4,7 @@
     siteUrl: 'https://aimorelogy.com',
     description: 'Leading open source project incubator transforming open source innovations into market success while respecting creators.',
     image: '/static/logo-1.png',
-    themeColor: '#00ff88',
+    themeColor: '#0a0a0f',
     twitterCard: 'summary_large_image'
   };
 
