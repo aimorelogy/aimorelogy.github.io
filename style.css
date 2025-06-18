@@ -2045,4 +2045,42 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* === TOASTS === */
+.toast-container {
+    position: fixed;
+    bottom: var(--space-xl);
+    right: var(--space-xl);
+    z-index: var(--z-tooltip);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    backdrop-filter: var(--glass-backdrop);
+    background: var(--bg-glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: var(--text-primary);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s ease;
+    max-width: 300px;
+}
+.toast.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+.toast-success { border-left: 4px solid var(--primary-neon); }
+.toast-error   { border-left: 4px solid #ef4444; }
+.toast i { font-size: 1.1rem; }
+@media (max-width: 768px) {
+    .toast-container { bottom: var(--space-lg); right: 50%; transform: translateX(50%); }
 } 

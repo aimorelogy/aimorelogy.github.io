@@ -356,6 +356,16 @@ class AdvancedContactForm {
     init() {
         if (!this.form) return;
         
+        /* ==== Initialize EmailJS SDK ==== */
+        if (window.emailjs && !emailjs.__initialized) {
+            try {
+                emailjs.init('0w8MRNqwsVkqPBbOy');
+                emailjs.__initialized = true;
+            } catch (e) {
+                console.error('EmailJS init failed', e);
+            }
+        }
+        
         this.setupFields();
         this.setupValidation();
         this.setupSubmission();
@@ -521,21 +531,21 @@ class AdvancedContactForm {
     hasEmailJSConfig() {
         // Check if EmailJS is properly configured
         // You would need to replace these with your actual EmailJS credentials
-        const serviceID = 'YOUR_SERVICE_ID';
-        const templateID = 'YOUR_TEMPLATE_ID';
-        const userID = 'YOUR_USER_ID';
+        const serviceID = 'service_yv5k23f';
+        const templateID = 'template_ipdubf5';
+        const userID = '0w8MRNqwsVkqPBbOy';
         
-        return serviceID !== 'YOUR_SERVICE_ID' && templateID !== 'YOUR_TEMPLATE_ID';
+        return true;
     }
     
     sendWithEmailJS(data) {
-        return emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+        return emailjs.send('service_yv5k23f', 'template_ipdubf5', {
             from_name: data.name,
             from_email: data.email,
             project_type: data.project || 'Not specified',
             message: data.message,
             to_email: 'info@aimorelogy.com'
-        }, 'YOUR_USER_ID');
+        }, '0w8MRNqwsVkqPBbOy');
     }
     
     sendWithMailto(data) {
@@ -564,47 +574,11 @@ class AdvancedContactForm {
     }
     
     showError(errors) {
-        this.removeMessages();
-        
-        const errorContainer = document.createElement('div');
-        errorContainer.className = 'form-errors';
-        errorContainer.innerHTML = `
-            <div class="error-header">
-                <i class="fas fa-exclamation-triangle"></i>
-                Please correct the following errors:
-            </div>
-            <ul>
-                ${errors.map(error => `<li>${error}</li>`).join('')}
-            </ul>
-        `;
-        
-        this.form.insertBefore(errorContainer, this.form.firstChild);
-        errorContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // Auto-remove after 10 seconds
-        setTimeout(() => errorContainer.remove(), 10000);
+        createToast('error', Array.isArray(errors) ? errors.join('<br/>') : errors);
     }
     
     showSuccess() {
-        this.removeMessages();
-        
-        const successContainer = document.createElement('div');
-        successContainer.className = 'form-success';
-        successContainer.innerHTML = `
-            <div class="success-content">
-                <div class="success-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <h4>Message Sent Successfully!</h4>
-                <p>Thank you for contacting us. We'll get back to you soon.</p>
-            </div>
-        `;
-        
-        this.form.insertBefore(successContainer, this.form.firstChild);
-        successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // Auto-remove after 5 seconds
-        setTimeout(() => successContainer.remove(), 5000);
+        createToast('success', 'Message sent successfully! We will contact you soon.');
     }
     
     removeMessages() {
@@ -754,7 +728,7 @@ class PerformanceMonitor {
     }
     
     setupFPSMonitor() {
-        if (process.env.NODE_ENV === 'development') {
+        if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
             let frames = 0;
             let prevTime = performance.now();
             
@@ -911,4 +885,23 @@ if (!CSS.supports('color', 'var(--primary-color)')) {
 // === EXPORT FOR MODULE SYSTEMS ===
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = AIMorelogyApp;
+}
+
+/* === GLOBAL TOAST UTILITY === */
+function createToast(type, message) {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'exclamation-triangle'}"></i><span>${message}</span>`;
+    container.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('visible'));
+    setTimeout(() => {
+        toast.classList.remove('visible');
+        toast.addEventListener('transitionend', () => toast.remove());
+    }, 4000);
 } 
