@@ -1,7 +1,7 @@
 (function () {
   const defaults = {
     siteName: 'AIMORELOGY - Open Source Incubator',
-    siteUrl: 'https://aimorelogy.github.io',
+    siteUrl: 'https://aimorelogy.com',
     description: 'Leading open source project incubator transforming open source innovations into market success while respecting creators.',
     image: '/static/logo.png',
     themeColor: '#00ff88',
