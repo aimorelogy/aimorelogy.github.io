@@ -1,626 +1,914 @@
-// Mobile Navigation Toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
+// ===================================
+//   AIMORELOGY - Modern JavaScript Framework
+//   Performance Optimized & Feature Rich
+//   Mobile/Tablet/Desktop Compatible
+// ===================================
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+// === UTILITY FUNCTIONS ===
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-}));
-
-// Particle Animation
-function createParticles() {
-    const particlesContainer = document.querySelector('.particles-container');
-    const particleCount = 50;
-
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        
-        // Random size between 2-6px
-        const size = Math.random() * 4 + 2;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        
-        // Random position
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        
-        // Random animation delay
-        particle.style.animationDelay = `${Math.random() * 3}s`;
-        
-        particlesContainer.appendChild(particle);
-    }
-}
-
-// Scroll Animations
-function handleScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+// Debounce function for performance
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
     };
+};
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+// Throttle function for scroll events
+const throttle = (func, limit) => {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+};
+
+// === MODERN NAVIGATION ===
+class ModernNavigation {
+    constructor() {
+        this.navbar = $('.navbar');
+        this.hamburger = $('.hamburger');
+        this.navMenu = $('.nav-menu');
+        this.navLinks = $$('.nav-link');
+        this.isMenuOpen = false;
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.handleScroll();
+    }
+    
+    setupEventListeners() {
+        // Hamburger menu toggle
+        this.hamburger?.addEventListener('click', () => this.toggleMobileMenu());
+        
+        // Close menu when clicking nav links
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', () => this.closeMobileMenu());
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.isMenuOpen && !this.navMenu.contains(e.target) && !this.hamburger.contains(e.target)) {
+                this.closeMobileMenu();
             }
         });
-    }, observerOptions);
-
-    // Observe elements for scroll animations
-    document.querySelectorAll('.process-step-circular, .advantage-card, .partner-logo, .about-story, .about-vision, .contact-item').forEach(el => {
-        el.classList.add('fade-in');
-        observer.observe(el);
-    });
-}
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+        
+        // Smooth scroll for anchor links
+        this.navLinks.forEach(link => {
+            if (link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', (e) => this.smoothScrollToSection(e));
+            }
+        });
+        
+        // Enhanced scroll behavior
+        window.addEventListener('scroll', throttle(() => this.handleScroll(), 16));
+    }
+    
+    toggleMobileMenu() {
+        this.isMenuOpen = !this.isMenuOpen;
+        this.hamburger.classList.toggle('active');
+        this.navMenu.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = this.isMenuOpen ? 'hidden' : '';
+    }
+    
+    closeMobileMenu() {
+        this.isMenuOpen = false;
+        this.hamburger?.classList.remove('active');
+        this.navMenu?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    smoothScrollToSection(e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = $(e.target.getAttribute('href'));
         if (target) {
-            const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+            const offsetTop = target.offsetTop - 80;
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
             });
         }
-    });
-});
-
-// Navbar background on scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(10, 10, 15, 0.98)';
-    } else {
-        navbar.style.background = 'rgba(10, 10, 15, 0.95)';
     }
-});
-
-// Terminal typing animation
-function typewriterEffect() {
-    const codeLines = document.querySelectorAll('.code-line');
-    let delay = 2000; // Start after 2 seconds
-
-    codeLines.forEach((line, index) => {
-        setTimeout(() => {
-            line.style.opacity = '1';
-            line.style.animation = 'none';
-            
-            // Add cursor effect
-            const cursor = document.createElement('span');
-            cursor.textContent = '|';
-            cursor.style.animation = 'blink 1s infinite';
-            cursor.style.color = 'var(--primary-color)';
-            
-            // Add and remove cursor
-            line.appendChild(cursor);
-            setTimeout(() => {
-                if (cursor.parentNode) {
-                    cursor.remove();
-                }
-            }, 1000);
-        }, delay + (index * 500));
-    });
-}
-
-// Blink animation for cursor
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes blink {
-        0%, 50% { opacity: 1; }
-        51%, 100% { opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
-
-// Mouse parallax effect
-function parallaxEffect() {
-    document.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX / window.innerWidth;
-        const mouseY = e.clientY / window.innerHeight;
-        
-        // Move particles slightly based on mouse position
-        document.querySelectorAll('.particle').forEach((particle, index) => {
-            const speed = (index % 3 + 1) * 0.5;
-            const x = (mouseX - 0.5) * speed;
-            const y = (mouseY - 0.5) * speed;
-            
-            particle.style.transform = `translate(${x}px, ${y}px)`;
-        });
-        
-        // Move terminal slightly
-        const terminal = document.querySelector('.code-terminal');
-        if (terminal) {
-            const x = (mouseX - 0.5) * 10;
-            const y = (mouseY - 0.5) * 10;
-            terminal.style.transform = `translate(${x}px, ${y}px)`;
-        }
-    });
-}
-
-// Button hover effects
-function addButtonEffects() {
-    document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('mouseover', function() {
-            this.style.transform = 'translateY(-2px) scale(1.05)';
-        });
-        
-        btn.addEventListener('mouseout', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-        
-        btn.addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(0) scale(0.98)';
-        });
-        
-        btn.addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(-2px) scale(1.05)';
-        });
-    });
-}
-
-// Process step animation on scroll
-function animateProcessSteps() {
-    const processSteps = document.querySelectorAll('.process-step-circular');
     
-    if (processSteps.length > 0) {
+    handleScroll() {
+        const scrolled = window.scrollY > 50;
+        this.navbar?.classList.toggle('scrolled', scrolled);
+        
+        // Update active nav link based on section
+        this.updateActiveNavLink();
+    }
+    
+    updateActiveNavLink() {
+        const sections = $$('section[id]');
+        const scrollPos = window.scrollY + 100;
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            const navLink = $(`.nav-link[href="#${sectionId}"]`);
+            
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                this.navLinks.forEach(link => link.classList.remove('active'));
+                navLink?.classList.add('active');
+            }
+        });
+    }
+}
+
+// === PARTICLE SYSTEM ===
+class ParticleSystem {
+    constructor(container) {
+        this.container = container;
+        this.particles = [];
+        this.animationId = null;
+        this.isVisible = false;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.container) return;
+        
+        this.createParticles();
+        this.setupIntersectionObserver();
+    }
+    
+    createParticles() {
+        const particleCount = window.innerWidth < 768 ? 30 : 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = this.createParticle();
+            this.particles.push(particle);
+            this.container.appendChild(particle.element);
+        }
+    }
+    
+    createParticle() {
+        const element = document.createElement('div');
+        element.className = 'particle';
+        
+        const size = Math.random() * 4 + 2;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const duration = Math.random() * 6 + 4;
+        const delay = Math.random() * 3;
+        
+        element.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}%;
+            top: ${y}%;
+            animation-duration: ${duration}s;
+            animation-delay: ${delay}s;
+        `;
+        
+        return {
+            element,
+            x,
+            y,
+            size,
+            duration,
+            delay
+        };
+    }
+    
+    setupIntersectionObserver() {
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.transform = entry.target.style.transform.replace('scale(0)', 'scale(1)');
-                        entry.target.style.opacity = '1';
-                    }, index * 150);
+            entries.forEach(entry => {
+                this.isVisible = entry.isIntersecting;
+                if (this.isVisible) {
+                    this.startAnimation();
+                } else {
+                    this.stopAnimation();
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.1 });
         
-        processSteps.forEach((step, index) => {
-            const originalTransform = getComputedStyle(step).transform;
-            step.style.transform = originalTransform + ' scale(0)';
-            step.style.opacity = '0';
-            step.style.transition = `all 0.6s ease ${index * 0.1}s`;
-            observer.observe(step);
+        observer.observe(this.container);
+    }
+    
+    startAnimation() {
+        if (this.animationId) return;
+        
+        this.particles.forEach(particle => {
+            particle.element.style.animationPlayState = 'running';
+        });
+    }
+    
+    stopAnimation() {
+        this.particles.forEach(particle => {
+            particle.element.style.animationPlayState = 'paused';
         });
     }
 }
 
-// Card hover sound effect (visual feedback)
-function addCardInteractions() {
-    document.querySelectorAll('.advantage-card, .partner-logo, .contact-item').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
+// === TERMINAL ANIMATION ===
+class TerminalAnimation {
+    constructor(terminal) {
+        this.terminal = terminal;
+        this.codeLines = terminal?.querySelectorAll('.code-line');
+        this.isAnimated = false;
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
+        this.init();
+    }
+    
+    init() {
+        if (!this.terminal) return;
+        this.setupIntersectionObserver();
+    }
+    
+    setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !this.isAnimated) {
+                    this.startTypewriter();
+                    this.isAnimated = true;
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(this.terminal);
+    }
+    
+    async startTypewriter() {
+        for (let i = 0; i < this.codeLines.length; i++) {
+            await this.animateLine(this.codeLines[i], i);
+        }
+    }
+    
+    animateLine(line, index) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                line.style.opacity = '1';
+                line.style.transform = 'translateX(0)';
+                
+                // Add cursor effect
+                const cursor = document.createElement('span');
+                cursor.textContent = '|';
+                cursor.style.cssText = `
+                    color: var(--primary-neon);
+                    animation: blink 1s infinite;
+                    margin-left: 2px;
+                `;
+                
+                line.appendChild(cursor);
+                
+                // Remove cursor after 1 second
+                setTimeout(() => {
+                    cursor.remove();
+                    resolve();
+                }, 1000);
+            }, index * 400 + 2000);
         });
-    });
+    }
 }
 
-
-
-// Page transition effect
-function handlePageTransition() {
-    const transition = document.querySelector('.page-transition');
-    if (!transition) return;
+// === SCROLL ANIMATIONS ===
+class ScrollAnimations {
+    constructor() {
+        this.animatedElements = [];
+        this.init();
+    }
     
-    // Check if already initialized
-    if (transition.dataset.transitionReady) return;
-    transition.dataset.transitionReady = 'true';
+    init() {
+        this.setupIntersectionObserver();
+        this.setupParallaxEffect();
+    }
     
-    // Simple flag for preventing double execution
-    let isTransitioning = false;
-    
-    // Hide transition when page loads
-    function hideTransition() {
-        if (isTransitioning) return;
-        isTransitioning = true;
+    setupIntersectionObserver() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
         
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animations
+        const elementsToAnimate = [
+            '.pipeline-step',
+            '.advantage-card',
+            '.partner-logo',
+            '.contact-item',
+            '.timeline-item',
+            '.story-text',
+            '.vision-text'
+        ];
+        
+        elementsToAnimate.forEach(selector => {
+            $$(selector).forEach(el => {
+                el.classList.add('fade-in');
+                observer.observe(el);
+            });
+        });
+    }
+    
+    setupParallaxEffect() {
+        const parallaxElements = $$('[data-parallax]');
+        
+        if (parallaxElements.length === 0) return;
+        
+        window.addEventListener('scroll', throttle(() => {
+            const scrollTop = window.pageYOffset;
+            
+            parallaxElements.forEach(element => {
+                const speed = parseFloat(element.dataset.parallax) || 0.5;
+                const yPos = -(scrollTop * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        }, 16));
+    }
+}
+
+// === ADVANCED CONTACT FORM ===
+class AdvancedContactForm {
+    constructor(formSelector) {
+        this.form = $(formSelector);
+        this.fields = {};
+        this.isSubmitting = false;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.form) return;
+        
+        this.setupFields();
+        this.setupValidation();
+        this.setupSubmission();
+    }
+    
+    setupFields() {
+        const inputs = this.form.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            this.fields[input.name] = {
+                element: input,
+                isValid: false,
+                errorMessage: ''
+            };
+            
+            // Real-time validation
+            input.addEventListener('blur', () => this.validateField(input.name));
+            input.addEventListener('input', debounce(() => this.validateField(input.name), 300));
+        });
+    }
+    
+    setupValidation() {
+        this.validators = {
+            name: (value) => {
+                if (!value.trim()) return 'Name is required';
+                if (value.trim().length < 2) return 'Name must be at least 2 characters';
+                if (!/^[a-zA-Z\s\-']+$/.test(value)) return 'Name contains invalid characters';
+                return null;
+            },
+            
+            email: (value) => {
+                if (!value.trim()) return 'Email is required';
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) return 'Please enter a valid email address';
+                return null;
+            },
+            
+            message: (value) => {
+                if (!value.trim()) return 'Message is required';
+                if (value.trim().length < 10) return 'Message must be at least 10 characters';
+                if (value.length > 1000) return 'Message cannot exceed 1000 characters';
+                return null;
+            },
+            
+            project: (value) => {
+                // Optional field, always valid
+                return null;
+            }
+        };
+    }
+    
+    validateField(fieldName) {
+        const field = this.fields[fieldName];
+        if (!field || !this.validators[fieldName]) return;
+        
+        const value = field.element.value;
+        const error = this.validators[fieldName](value);
+        
+        field.isValid = !error;
+        field.errorMessage = error || '';
+        
+        this.showFieldValidation(fieldName, field.isValid, field.errorMessage);
+        
+        return field.isValid;
+    }
+    
+    showFieldValidation(fieldName, isValid, message) {
+        const field = this.fields[fieldName];
+        const input = field.element;
+        
+        // Remove existing feedback
+        const existingFeedback = input.parentNode.querySelector('.validation-feedback');
+        if (existingFeedback) existingFeedback.remove();
+        
+        // Reset input styles
+        input.style.borderColor = '';
+        
+        if (message) {
+            const feedback = document.createElement('div');
+            feedback.className = `validation-feedback ${isValid ? 'valid' : 'invalid'}`;
+            feedback.innerHTML = `
+                <i class="fas fa-${isValid ? 'check' : 'exclamation-triangle'}"></i>
+                ${message}
+            `;
+            
+            input.parentNode.appendChild(feedback);
+            input.style.borderColor = isValid ? 'var(--primary-neon)' : '#ef4444';
+        }
+    }
+    
+    setupSubmission() {
+        this.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleSubmit();
+        });
+    }
+    
+    async handleSubmit() {
+        if (this.isSubmitting) return;
+        
+        // Validate all fields
+        let isFormValid = true;
+        Object.keys(this.fields).forEach(fieldName => {
+            if (!this.validateField(fieldName)) {
+                isFormValid = false;
+            }
+        });
+        
+        // Check for spam
+        if (isFormValid && this.detectSpam()) {
+            this.showError(['Your message appears to contain spam content. Please revise and try again.']);
+            return;
+        }
+        
+        if (!isFormValid) {
+            const errors = Object.values(this.fields)
+                .filter(field => !field.isValid && field.errorMessage)
+                .map(field => field.errorMessage);
+            this.showError(errors);
+            return;
+        }
+        
+        this.isSubmitting = true;
+        this.showLoadingState();
+        
+        try {
+            await this.submitForm();
+            this.showSuccess();
+            this.resetForm();
+        } catch (error) {
+            this.showError(['Failed to send message. Please try again or contact us directly.']);
+        } finally {
+            this.isSubmitting = false;
+            this.hideLoadingState();
+        }
+    }
+    
+    detectSpam() {
+        const formData = new FormData(this.form);
+        const combinedText = Array.from(formData.values()).join(' ').toLowerCase();
+        
+        const spamPatterns = [
+            /viagra|cialis|lottery|winner|congratulations/gi,
+            /\$\$\$|\$\d+/g,
+            /click here|visit now|act now/gi,
+            /free money|get rich|make money fast/gi
+        ];
+        
+        return spamPatterns.some(pattern => pattern.test(combinedText));
+    }
+    
+    async submitForm() {
+        const formData = new FormData(this.form);
+        const data = Object.fromEntries(formData);
+        
+        // Try EmailJS first, fallback to mailto
+        if (window.emailjs && this.hasEmailJSConfig()) {
+            return this.sendWithEmailJS(data);
+        } else {
+            return this.sendWithMailto(data);
+        }
+    }
+    
+    hasEmailJSConfig() {
+        // Check if EmailJS is properly configured
+        // You would need to replace these with your actual EmailJS credentials
+        const serviceID = 'YOUR_SERVICE_ID';
+        const templateID = 'YOUR_TEMPLATE_ID';
+        const userID = 'YOUR_USER_ID';
+        
+        return serviceID !== 'YOUR_SERVICE_ID' && templateID !== 'YOUR_TEMPLATE_ID';
+    }
+    
+    sendWithEmailJS(data) {
+        return emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+            from_name: data.name,
+            from_email: data.email,
+            project_type: data.project || 'Not specified',
+            message: data.message,
+            to_email: 'info@aimorelogy.com'
+        }, 'YOUR_USER_ID');
+    }
+    
+    sendWithMailto(data) {
+        const subject = `Contact from ${data.name} - ${data.project || 'General Inquiry'}`;
+        const body = `Name: ${data.name}\nEmail: ${data.email}\nProject Type: ${data.project || 'Not specified'}\n\nMessage:\n${data.message}`;
+        const mailtoLink = `mailto:info@aimorelogy.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        window.open(mailtoLink);
+        return Promise.resolve();
+    }
+    
+    showLoadingState() {
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+        }
+    }
+    
+    hideLoadingState() {
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.innerHTML = 'Send Message';
+            submitBtn.disabled = false;
+        }
+    }
+    
+    showError(errors) {
+        this.removeMessages();
+        
+        const errorContainer = document.createElement('div');
+        errorContainer.className = 'form-errors';
+        errorContainer.innerHTML = `
+            <div class="error-header">
+                <i class="fas fa-exclamation-triangle"></i>
+                Please correct the following errors:
+            </div>
+            <ul>
+                ${errors.map(error => `<li>${error}</li>`).join('')}
+            </ul>
+        `;
+        
+        this.form.insertBefore(errorContainer, this.form.firstChild);
+        errorContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Auto-remove after 10 seconds
+        setTimeout(() => errorContainer.remove(), 10000);
+    }
+    
+    showSuccess() {
+        this.removeMessages();
+        
+        const successContainer = document.createElement('div');
+        successContainer.className = 'form-success';
+        successContainer.innerHTML = `
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h4>Message Sent Successfully!</h4>
+                <p>Thank you for contacting us. We'll get back to you soon.</p>
+            </div>
+        `;
+        
+        this.form.insertBefore(successContainer, this.form.firstChild);
+        successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => successContainer.remove(), 5000);
+    }
+    
+    removeMessages() {
+        const messages = this.form.querySelectorAll('.form-errors, .form-success');
+        messages.forEach(msg => msg.remove());
+    }
+    
+    resetForm() {
+        this.form.reset();
+        
+        // Clear validation feedback
+        Object.values(this.fields).forEach(field => {
+            field.isValid = false;
+            field.errorMessage = '';
+            field.element.style.borderColor = '';
+        });
+        
+        const feedbacks = this.form.querySelectorAll('.validation-feedback');
+        feedbacks.forEach(feedback => feedback.remove());
+    }
+}
+
+// === PAGE TRANSITIONS ===
+class PageTransitions {
+    constructor() {
+        this.transitionOverlay = $('.page-transition');
+        this.isTransitioning = false;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.transitionOverlay) return;
+        
+        this.hideTransition();
+        this.setupLinkHandlers();
+    }
+    
+    hideTransition() {
         setTimeout(() => {
-            transition.classList.add('hidden');
-            isTransitioning = false;
+            this.transitionOverlay.classList.add('hidden');
         }, 1000);
     }
     
-    // Hide on load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', hideTransition);
-    } else {
-        hideTransition();
-    }
-    
-    // Handle clicks on navigation links
-    document.addEventListener('click', (e) => {
-        const link = e.target.closest('a[href$=".html"]');
-        if (!link || isTransitioning) return;
-        
-        const href = link.getAttribute('href');
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        
-        // Only transition if going to different page
-        if (href && href !== currentPage) {
-            e.preventDefault();
-            isTransitioning = true;
+    setupLinkHandlers() {
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href$=".html"]');
+            if (!link || this.isTransitioning) return;
             
-            transition.classList.remove('hidden');
+            const href = link.getAttribute('href');
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             
-            setTimeout(() => {
-                window.location.href = href;
-            }, 500);
-        }
-    });
-}
-
-// Contact form handling with advanced validation
-function handleContactForm() {
-    const form = document.querySelector('.form');
-    if (form) {
-        // Add real-time validation
-        const nameInput = form.querySelector('#name');
-        const emailInput = form.querySelector('#email');
-        const messageInput = form.querySelector('#message');
-        
-        // Email validation regex
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        // Real-time validation feedback
-        function addValidationFeedback(input, isValid, message) {
-            removeValidationFeedback(input);
-            
-            const feedback = document.createElement('div');
-            feedback.className = `validation-feedback ${isValid ? 'valid' : 'invalid'}`;
-            feedback.textContent = message;
-            input.parentNode.appendChild(feedback);
-            
-            input.style.borderColor = isValid ? 'var(--primary-color)' : 'var(--accent-color)';
-        }
-        
-        function removeValidationFeedback(input) {
-            const existing = input.parentNode.querySelector('.validation-feedback');
-            if (existing) existing.remove();
-            input.style.borderColor = 'var(--border-color)';
-        }
-        
-        // Name validation
-        nameInput.addEventListener('blur', () => {
-            const name = nameInput.value.trim();
-            if (name.length < 2) {
-                addValidationFeedback(nameInput, false, 'Name must be at least 2 characters long');
-            } else if (!/^[a-zA-Z\s]+$/.test(name)) {
-                addValidationFeedback(nameInput, false, 'Name can only contain letters and spaces');
-            } else {
-                addValidationFeedback(nameInput, true, 'Valid name');
-            }
-        });
-        
-        // Email validation
-        emailInput.addEventListener('blur', () => {
-            const email = emailInput.value.trim();
-            if (!emailRegex.test(email)) {
-                addValidationFeedback(emailInput, false, 'Please enter a valid email address');
-            } else {
-                addValidationFeedback(emailInput, true, 'Valid email address');
-            }
-        });
-        
-        // Message validation
-        messageInput.addEventListener('blur', () => {
-            const message = messageInput.value.trim();
-            if (message.length < 10) {
-                addValidationFeedback(messageInput, false, 'Message must be at least 10 characters long');
-            } else if (message.length > 1000) {
-                addValidationFeedback(messageInput, false, 'Message cannot exceed 1000 characters');
-            } else {
-                addValidationFeedback(messageInput, true, 'Valid message');
-            }
-        });
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(form);
-            const name = formData.get('name').trim();
-            const email = formData.get('email').trim();
-            const project = formData.get('project');
-            const message = formData.get('message').trim();
-            
-            // Comprehensive validation
-            let isValid = true;
-            let errors = [];
-            
-            // Name validation
-            if (!name || name.length < 2) {
-                errors.push('Please enter a valid name (at least 2 characters)');
-                isValid = false;
-            } else if (!/^[a-zA-Z\s]+$/.test(name)) {
-                errors.push('Name can only contain letters and spaces');
-                isValid = false;
-            }
-            
-            // Email validation
-            if (!email || !emailRegex.test(email)) {
-                errors.push('Please enter a valid email address');
-                isValid = false;
-            }
-            
-            // Message validation
-            if (!message || message.length < 10) {
-                errors.push('Please enter a message (at least 10 characters)');
-                isValid = false;
-            } else if (message.length > 1000) {
-                errors.push('Message cannot exceed 1000 characters');
-                isValid = false;
-            }
-            
-            // Check for spam patterns
-            const spamPatterns = [
-                /viagra|cialis|loan|lottery|winner|congratulations/gi,
-                /\$\$\$|\$\d+/g,
-                /click here|visit now|act now/gi
-            ];
-            
-            const combinedText = `${name} ${email} ${message}`.toLowerCase();
-            const hasSpamContent = spamPatterns.some(pattern => pattern.test(combinedText));
-            
-            if (hasSpamContent) {
-                errors.push('Message appears to contain spam content');
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                showFormError(errors);
-                return;
-            }
-            
-            // If validation passes, submit form
-            submitForm(form, { name, email, project, message });
-        });
-    }
-}
-
-function showFormError(errors) {
-    const errorContainer = document.createElement('div');
-    errorContainer.className = 'form-errors';
-    errorContainer.innerHTML = `
-        <div class="error-header">
-            <i class="fas fa-exclamation-triangle"></i>
-            Please correct the following errors:
-        </div>
-        <ul>
-            ${errors.map(error => `<li>${error}</li>`).join('')}
-        </ul>
-    `;
-    
-    // Remove existing error container
-    const existing = document.querySelector('.form-errors');
-    if (existing) existing.remove();
-    
-    // Insert at top of form
-    const form = document.querySelector('.form');
-    form.insertBefore(errorContainer, form.firstChild);
-    
-    // Scroll to errors
-    errorContainer.scrollIntoView({ behavior: 'smooth' });
-    
-    // Remove after 10 seconds
-    setTimeout(() => {
-        if (errorContainer.parentNode) {
-            errorContainer.remove();
-        }
-    }, 10000);
-}
-
-function submitForm(form, data) {
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    
-    // Show loading state
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    submitBtn.disabled = true;
-    
-    // Check if EmailJS is available
-    if (typeof emailjs === 'undefined') {
-        // Fallback: Create mailto link
-        const subject = `Contact from ${data.name} - ${data.project || 'General Inquiry'}`;
-        const body = `Name: ${data.name}\nEmail: ${data.email}\nProject Type: ${data.project || 'Not specified'}\n\nMessage:\n${data.message}`;
-        const mailtoLink = `mailto:info@aimorelogy.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
-        window.open(mailtoLink);
-        
-        showSuccessMessage('Your email client has been opened. Please send the email to complete your message.');
-        form.reset();
-        form.querySelectorAll('.validation-feedback').forEach(el => el.remove());
-        form.querySelectorAll('input, select, textarea').forEach(el => {
-            el.style.borderColor = 'var(--border-color)';
-        });
-        
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        return;
-    }
-    
-    // EmailJS configuration (you need to set these up)
-    const serviceID = 'YOUR_SERVICE_ID'; // Replace with your EmailJS service ID
-    const templateID = 'YOUR_TEMPLATE_ID'; // Replace with your EmailJS template ID
-    const userID = 'YOUR_USER_ID'; // Replace with your EmailJS user ID
-    
-    // If EmailJS is not configured, use mailto fallback
-    if (serviceID === 'YOUR_SERVICE_ID') {
-        const subject = `Contact from ${data.name} - ${data.project || 'General Inquiry'}`;
-        const body = `Name: ${data.name}\nEmail: ${data.email}\nProject Type: ${data.project || 'Not specified'}\n\nMessage:\n${data.message}`;
-        const mailtoLink = `mailto:info@aimorelogy.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
-        window.open(mailtoLink);
-        
-        showSuccessMessage('Your email client has been opened. Please send the email to complete your message.');
-        form.reset();
-        form.querySelectorAll('.validation-feedback').forEach(el => el.remove());
-        form.querySelectorAll('input, select, textarea').forEach(el => {
-            el.style.borderColor = 'var(--border-color)';
-        });
-        
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        return;
-    }
-    
-    // Send email using EmailJS
-    emailjs.send(serviceID, templateID, {
-        from_name: data.name,
-        from_email: data.email,
-        project_type: data.project || 'Not specified',
-        message: data.message,
-        to_email: 'info@aimorelogy.com'
-    }, userID)
-    .then(() => {
-        showSuccessMessage();
-        form.reset();
-        form.querySelectorAll('.validation-feedback').forEach(el => el.remove());
-        form.querySelectorAll('input, select, textarea').forEach(el => {
-            el.style.borderColor = 'var(--border-color)';
-        });
-    })
-    .catch((error) => {
-        console.error('EmailJS error:', error);
-        showFormError(['Failed to send message. Please try again or contact us directly at info@aimorelogy.com']);
-    })
-    .finally(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    });
-}
-
-function showSuccessMessage(customMessage = null) {
-    const successContainer = document.createElement('div');
-    successContainer.className = 'form-success';
-    
-    const defaultMessage = 'Thank you for your message. We will get back to you within 24 hours.';
-    const message = customMessage || defaultMessage;
-    
-    successContainer.innerHTML = `
-        <div class="success-content">
-            <div class="success-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h4>Message Sent Successfully!</h4>
-            <p>${message}</p>
-        </div>
-    `;
-    
-    const form = document.querySelector('.form');
-    form.insertBefore(successContainer, form.firstChild);
-    
-    // Remove after 8 seconds
-    setTimeout(() => {
-        if (successContainer.parentNode) {
-            successContainer.remove();
-        }
-    }, 8000);
-}
-
-// Performance optimization for scroll events
-let ticking = false;
-
-function updateScrollAnimations() {
-    // Update any scroll-based animations here
-    ticking = false;
-}
-
-document.addEventListener('scroll', () => {
-    if (!ticking) {
-        requestAnimationFrame(updateScrollAnimations);
-        ticking = true;
-    }
-});
-
-// Resize handler for responsive adjustments
-window.addEventListener('resize', () => {
-    // Recreate particles if needed
-    if (window.innerWidth !== window.lastWidth) {
-        window.lastWidth = window.innerWidth;
-        // You can add resize-specific logic here
-    }
-});
-
-// Add dynamic typing effect to hero subtitle
-function typeHeroSubtitle() {
-    const subtitle = document.querySelector('.hero-subtitle');
-    if (subtitle) {
-        const text = subtitle.textContent;
-        subtitle.textContent = '';
-        subtitle.style.opacity = '1';
-        
-        let index = 0;
-        const typingSpeed = 50;
-        
-        function type() {
-            if (index < text.length) {
-                subtitle.textContent += text.charAt(index);
-                index++;
-                setTimeout(type, typingSpeed);
-            }
-        }
-        
-        setTimeout(type, 1500); // Start after title animation
-    }
-}
-
-// Global initialization flag
-let appInitialized = false;
-
-// Initialize everything when DOM is loaded - SINGLE INITIALIZATION
-document.addEventListener('DOMContentLoaded', () => {
-    // Prevent multiple initializations
-    if (appInitialized) return;
-    appInitialized = true;
-    
-    // Core functionality
-    handlePageTransition();
-    createParticles();
-    handleScrollAnimations();
-    handleContactForm();
-    
-    // Only run terminal effect on home page
-    if (document.querySelector('.code-terminal')) {
-        setTimeout(typewriterEffect, 1500);
-    }
-    
-    // Initialize hero subtitle typing if exists
-    if (document.querySelector('.hero-subtitle')) {
-        setTimeout(typeHeroSubtitle, 0);
-    }
-    
-    // Visual effects
-    parallaxEffect();
-    addButtonEffects();
-    animateProcessSteps();
-    addCardInteractions();
-    
-    // Contact button functionality
-    const contactBtns = document.querySelectorAll('.btn-secondary, .btn[href="#about"]');
-    contactBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            if (!btn.getAttribute('href')) {
+            if (href && href !== currentPage) {
                 e.preventDefault();
-                const aboutSection = document.querySelector('#about');
-                if (aboutSection) {
-                    aboutSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                this.navigateToPage(href);
             }
         });
-    });
-}); 
+    }
+    
+    navigateToPage(href) {
+        this.isTransitioning = true;
+        this.transitionOverlay.classList.remove('hidden');
+        
+        setTimeout(() => {
+            window.location.href = href;
+        }, 500);
+    }
+}
+
+// === MOUSE EFFECTS ===
+class MouseEffects {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupParallaxMouse();
+        this.setupHoverEffects();
+    }
+    
+    setupParallaxMouse() {
+        if (window.innerWidth < 768) return; // 移动设备跳过
+        
+        let isAnimating = false;
+        
+        document.addEventListener('mousemove', throttle((e) => {
+            if (isAnimating) return;
+            
+            isAnimating = true;
+            requestAnimationFrame(() => {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                // 只对终端添加轻微的视差效果
+                const terminal = $('.code-terminal');
+                if (terminal) {
+                    const x = (mouseX - 0.5) * 3;
+                    const y = (mouseY - 0.5) * 3;
+                    terminal.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+                }
+                
+                isAnimating = false;
+            });
+        }, 32)); // 降低频率到30fps
+    }
+    
+    setupHoverEffects() {
+        // 移除JavaScript中的hover效果，让CSS处理
+        // 只保留性能优化相关的设置
+        $$('.step-card, .advantage-card, .partner-logo, .contact-item, .btn').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.willChange = 'transform, box-shadow';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.willChange = 'auto';
+            });
+        });
+        
+        // 为按钮添加特殊的点击动画
+        $$('.btn').forEach(btn => {
+            btn.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.98) translateZ(0)';
+            });
+            
+            btn.addEventListener('mouseup', function() {
+                this.style.transform = '';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+    }
+}
+
+// === PERFORMANCE MONITOR ===
+class PerformanceMonitor {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupFPSMonitor();
+        this.setupLazyLoading();
+        this.setupImageOptimization();
+    }
+    
+    setupFPSMonitor() {
+        if (process.env.NODE_ENV === 'development') {
+            let frames = 0;
+            let prevTime = performance.now();
+            
+            const measureFPS = () => {
+                frames++;
+                const currentTime = performance.now();
+                
+                if (currentTime >= prevTime + 1000) {
+                    const fps = Math.round((frames * 1000) / (currentTime - prevTime));
+                    console.log(`FPS: ${fps}`);
+                    frames = 0;
+                    prevTime = currentTime;
+                }
+                
+                requestAnimationFrame(measureFPS);
+            };
+            
+            requestAnimationFrame(measureFPS);
+        }
+    }
+    
+    setupLazyLoading() {
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            $$('img[data-src]').forEach(img => {
+                img.classList.add('lazy');
+                imageObserver.observe(img);
+            });
+        }
+    }
+    
+    setupImageOptimization() {
+        // Preload critical images
+        const criticalImages = [
+            // Add paths to critical images here
+        ];
+        
+        criticalImages.forEach(src => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = src;
+            document.head.appendChild(link);
+        });
+    }
+}
+
+// === MAIN INITIALIZATION ===
+class AIMorelogyApp {
+    constructor() {
+        this.components = {};
+        this.init();
+    }
+    
+    init() {
+        // Wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
+        } else {
+            this.initializeComponents();
+        }
+    }
+    
+    initializeComponents() {
+        try {
+            // Initialize core components
+            this.components.navigation = new ModernNavigation();
+            this.components.scrollAnimations = new ScrollAnimations();
+            this.components.pageTransitions = new PageTransitions();
+            this.components.mouseEffects = new MouseEffects();
+            this.components.performanceMonitor = new PerformanceMonitor();
+            
+            // Initialize particle system for hero section
+            const particlesContainer = $('.particles-container');
+            if (particlesContainer) {
+                this.components.particleSystem = new ParticleSystem(particlesContainer);
+            }
+            
+            // Initialize terminal animation
+            const terminal = $('.code-terminal');
+            if (terminal) {
+                this.components.terminalAnimation = new TerminalAnimation(terminal);
+            }
+            
+            // Initialize contact form
+            const contactForm = $('.form');
+            if (contactForm) {
+                this.components.contactForm = new AdvancedContactForm('.form');
+            }
+            
+            // Add blink animation for cursor
+            this.addBlinkAnimation();
+            
+            console.log('🚀 AIMORELOGY App initialized successfully');
+            
+        } catch (error) {
+            console.error('Error initializing AIMORELOGY App:', error);
+        }
+    }
+    
+    addBlinkAnimation() {
+        if (!$('#blink-style')) {
+            const style = document.createElement('style');
+            style.id = 'blink-style';
+            style.textContent = `
+                @keyframes blink {
+                    0%, 50% { opacity: 1; }
+                    51%, 100% { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+    
+    // Public API for external access
+    getComponent(name) {
+        return this.components[name];
+    }
+    
+    // Cleanup method for SPA navigation
+    destroy() {
+        Object.values(this.components).forEach(component => {
+            if (component.destroy && typeof component.destroy === 'function') {
+                component.destroy();
+            }
+        });
+    }
+}
+
+// === AUTO-INITIALIZATION ===
+const app = new AIMorelogyApp();
+
+// Make app globally available for debugging
+if (typeof window !== 'undefined') {
+    window.AIMorelogyApp = app;
+}
+
+// === CSS CUSTOM PROPERTIES SUPPORT ===
+// Fallback for older browsers
+if (!CSS.supports('color', 'var(--primary-color)')) {
+    console.warn('CSS custom properties not supported. Consider adding a polyfill.');
+}
+
+// === EXPORT FOR MODULE SYSTEMS ===
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = AIMorelogyApp;
+} 

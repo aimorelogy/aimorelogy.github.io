@@ -3,14 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIMORELOGY - Open Source Incubator</title>
+    <meta name="description" content="AIMORELOGY - Leading open source project incubator in Hong Kong, transforming community innovations into commercial success.">
+    <meta name="keywords" content="open source, incubator, Hong Kong, innovation, technology, community">
+    <meta name="author" content="AIMORELOGY LIMITED">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AIMORELOGY - Open Source Incubator">
+    <meta property="og:description" content="Bridging open source innovation to market success">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimorelogy.github.io">
+    
+    <title>AIMORELOGY - Open Source Incubator | Bridging Innovation to Market</title>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#00ff88">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 </head>
 <body>
     <!-- Page Transition Overlay -->
-    <div class="page-transition">
+    <div class="page-transition" role="presentation" aria-hidden="true">
         <div class="transition-logo">
             <span class="logo-text">AIMORELOGY</span>
             <div class="loading-bar"></div>
@@ -18,210 +40,216 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <a href="index.html" class="nav-logo" aria-label="AIMORELOGY Home">
                 <span class="logo-text">AIMORELOGY</span>
                 <span class="logo-subtitle">OPEN SOURCE INCUBATOR</span>
             </a>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link active">Home</a>
+            
+            <ul class="nav-menu" role="menubar">
+                <li class="nav-item" role="none">
+                    <a href="index.html" class="nav-link active" role="menuitem" aria-current="page">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">About Us</a>
+                <li class="nav-item" role="none">
+                    <a href="about.html" class="nav-link" role="menuitem">About Us</a>
                 </li>
             </ul>
-            <div class="hamburger">
+            
+            <button class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 
-    <!-- Home Section -->
-    <section id="home" class="hero-section">
-        <div class="particles-container"></div>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="title-line">BRIDGING</span>
-                    <span class="title-line highlight">OPEN SOURCE</span>
-                    <span class="title-line">TO MARKET</span>
-                </h1>
-                <p class="hero-subtitle">Leading open source project incubator based in Hong Kong, transforming community innovations into commercial success while respecting creators and copyright.</p>
-                <div class="hero-buttons">
-                    <a href="about.html" class="btn btn-primary">Explore Our Mission</a>
-                    <a href="about.html#contact" class="btn btn-secondary">Contact Us</a>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section" aria-labelledby="hero-title">
+            <div class="particles-container" aria-hidden="true"></div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 id="hero-title" class="hero-title">
+                            <span class="title-line">BRIDGING</span>
+                            <span class="title-line highlight">OPEN SOURCE</span>
+                            <span class="title-line">TO MARKET</span>
+                        </h1>
+                        
+                        <p class="hero-subtitle">
+                            Leading open source project incubator based in Hong Kong, transforming community innovations into commercial success while respecting creators and copyright.
+                        </p>
+                        
+                        <div class="hero-buttons">
+                            <a href="about.html" class="btn btn-primary" aria-describedby="primary-btn-desc">
+                                <i class="fas fa-rocket" aria-hidden="true"></i>
+                                Explore Our Mission
+                            </a>
+                            <a href="about.html#contact" class="btn btn-secondary" aria-describedby="secondary-btn-desc">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                Contact Us
+                            </a>
+                        </div>
+                        
+                        <!-- Screen Reader Descriptions -->
+                        <span id="primary-btn-desc" class="sr-only">Learn more about AIMORELOGY's mission and services</span>
+                        <span id="secondary-btn-desc" class="sr-only">Get in touch with our team</span>
+                    </div>
+                    
+                    <div class="hero-visual" aria-hidden="true">
+                        <div class="code-terminal">
+                            <div class="terminal-header">
+                                <div class="terminal-buttons">
+                                    <span class="btn-red" title="Close"></span>
+                                    <span class="btn-yellow" title="Minimize"></span>
+                                    <span class="btn-green" title="Maximize"></span>
+                                </div>
+                                <span class="terminal-title">aimorelogy@terminal</span>
+                            </div>
+                            <div class="terminal-body">
+                                <div class="code-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">npm run incubate --project=open-source</span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="output">🚀 Launching project incubation...</span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="output">📦 Building market bridge...</span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="output">✅ Success: Community → Market → Community</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="code-terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-buttons">
-                            <span class="btn-red"></span>
-                            <span class="btn-yellow"></span>
-                            <span class="btn-green"></span>
-                        </div>
-                        <span class="terminal-title">aimorelogy@terminal</span>
-                    </div>
-                    <div class="terminal-body">
-                        <div class="code-line">
-                            <span class="prompt">$</span>
-                            <span class="command">npm run incubate --project=open-source</span>
-                        </div>
-                        <div class="code-line">
-                            <span class="output">🚀 Launching project incubation...</span>
-                        </div>
-                        <div class="code-line">
-                            <span class="output">📦 Building market bridge...</span>
-                        </div>
-                        <div class="code-line">
-                            <span class="output">✅ Success: Community → Market → Community</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Our Process Section -->
-    <section class="process-section">
-        <div class="container">
-            <h2 class="section-title">Our Innovation Pipeline</h2>
-            <div class="pipeline-container">
+        <!-- Process Section -->
+        <section class="process-section" aria-labelledby="process-title">
+            <div class="container">
+                <h2 id="process-title" class="section-title">Our Innovation Pipeline</h2>
+                
                 <div class="pipeline-flow">
-                    <!-- Step 1: Open Source Community -->
                     <div class="pipeline-step" data-step="1">
-                        <div class="step-card">
-                            <div class="step-number">01</div>
-                            <div class="step-icon">
+                        <article class="step-card">
+                            <div class="step-number" aria-hidden="true">01</div>
+                            <div class="step-icon" aria-hidden="true">
                                 <i class="fab fa-github"></i>
                             </div>
                             <h3>Open Source Community</h3>
-                            <p>Discover innovative projects and connect with creative developers</p>
-                        </div>
+                            <p>Discover innovative projects and connect with creative developers worldwide, fostering collaboration and innovation.</p>
+                        </article>
                     </div>
                     
-                    <!-- Pipeline Connector 1 -->
-                    <div class="pipeline-connector">
-                        <div class="connector-line">
-                            <div class="flow-animation"></div>
-                        </div>
-                        <div class="connector-arrow">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 2: AIMORELOGY -->
                     <div class="pipeline-step" data-step="2">
-                        <div class="step-card featured">
-                            <div class="step-number">02</div>
-                            <div class="step-icon">
+                        <article class="step-card featured">
+                            <div class="step-number" aria-hidden="true">02</div>
+                            <div class="step-icon" aria-hidden="true">
                                 <i class="fas fa-cogs"></i>
                             </div>
                             <h3>AIMORELOGY</h3>
-                            <p>Transform ideas into viable products through professional incubation</p>
-                        </div>
+                            <p>Transform innovative ideas into viable products through professional incubation, mentorship, and strategic guidance.</p>
+                        </article>
                     </div>
                     
-                    <!-- Pipeline Connector 2 -->
-                    <div class="pipeline-connector">
-                        <div class="connector-line">
-                            <div class="flow-animation"></div>
-                        </div>
-                        <div class="connector-arrow">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 3: Commercial Market -->
                     <div class="pipeline-step" data-step="3">
-                        <div class="step-card">
-                            <div class="step-number">03</div>
-                            <div class="step-icon">
+                        <article class="step-card">
+                            <div class="step-number" aria-hidden="true">03</div>
+                            <div class="step-icon" aria-hidden="true">
                                 <i class="fas fa-rocket"></i>
                             </div>
                             <h3>Commercial Market</h3>
-                            <p>Launch successful products to global markets with proven strategies</p>
+                            <p>Launch successful products to global markets with proven strategies, sustainable business models, and ongoing support.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advantages Section -->
+        <section class="advantages-section" aria-labelledby="advantages-title">
+            <div class="container">
+                <h2 id="advantages-title" class="section-title">Why Choose AIMORELOGY</h2>
+                
+                <div class="advantages-grid">
+                    <article class="advantage-card">
+                        <div class="card-icon" aria-hidden="true">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
+                        <h3>Copyright Respect</h3>
+                        <p>We maintain strict adherence to open source licenses and creator rights, ensuring ethical practices in every project we incubate.</p>
+                    </article>
+                    
+                    <article class="advantage-card">
+                        <div class="card-icon" aria-hidden="true">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community First</h3>
+                        <p>Our commitment to the open source community drives everything we do, fostering sustainable growth and meaningful collaboration.</p>
+                    </article>
+                    
+                    <article class="advantage-card">
+                        <div class="card-icon" aria-hidden="true">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Global Reach</h3>
+                        <p>Leveraging our Hong Kong base and international partnerships to bring open source innovations to worldwide markets effectively.</p>
+                    </article>
+                    
+                    <article class="advantage-card">
+                        <div class="card-icon" aria-hidden="true">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Production Expertise</h3>
+                        <p>Years of experience in scaling from prototype to mass production, ensuring quality, efficiency, and market readiness at every stage.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partners Section -->
+        <section class="partners-section" aria-labelledby="partners-title">
+            <div class="container">
+                <h2 id="partners-title" class="section-title">Our Partners</h2>
+                
+                <div class="partners-grid">
+                    <div class="partner-logo" tabindex="0" role="button" aria-label="Kickstarter partnership">
+                        <i class="fab fa-kickstarter" aria-hidden="true"></i>
+                        <span>Kickstarter</span>
+                    </div>
+                    
+                    <div class="partner-logo" tabindex="0" role="button" aria-label="Indiegogo partnership">
+                        <i class="fas fa-globe" aria-hidden="true"></i>
+                        <span>Indiegogo</span>
+                    </div>
+                    
+                    <div class="partner-logo" tabindex="0" role="button" aria-label="Meta partnership">
+                        <i class="fab fa-meta" aria-hidden="true"></i>
+                        <span>Meta</span>
+                    </div>
+                    
+                    <div class="partner-logo" tabindex="0" role="button" aria-label="Instagram partnership">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                        <span>Instagram</span>
+                    </div>
+                    
+                    <div class="partner-logo" tabindex="0" role="button" aria-label="TikTok partnership">
+                        <i class="fab fa-tiktok" aria-hidden="true"></i>
+                        <span>TikTok</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Our Advantages Section -->
-    <section class="advantages-section">
-        <div class="container">
-            <h2 class="section-title">Why Choose AIMORELOGY</h2>
-            <div class="advantages-grid">
-                <div class="advantage-card">
-                    <div class="card-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Copyright Respect</h3>
-                    <p>We maintain strict adherence to open source licenses and creator rights, ensuring ethical practices in every project we incubate.</p>
-                </div>
-                <div class="advantage-card">
-                    <div class="card-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Community First</h3>
-                    <p>Our commitment to the open source community drives everything we do, fostering sustainable growth and collaboration.</p>
-                </div>
-                <div class="advantage-card">
-                    <div class="card-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3>Global Reach</h3>
-                    <p>Leveraging our Hong Kong base and international partnerships to bring open source innovations to worldwide markets.</p>
-                </div>
-                <div class="advantage-card">
-                    <div class="card-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Production Expertise</h3>
-                    <p>Years of experience in scaling from prototype to mass production, ensuring quality and efficiency at every stage.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partners Section -->
-    <section class="partners-section">
-        <div class="container">
-            <h2 class="section-title">Our Partners</h2>
-            <div class="partners-grid">
-                <div class="partner-logo">
-                    <i class="fab fa-kickstarter"></i>
-                    <span>Kickstarter</span>
-                </div>
-                <div class="partner-logo">
-                    <i class="fas fa-globe"></i>
-                    <span>Indiegogo</span>
-                </div>
-                <div class="partner-logo">
-                    <i class="fab fa-facebook"></i>
-                    <span>Facebook</span>
-                </div>
-                <div class="partner-logo">
-                    <i class="fab fa-instagram"></i>
-                    <span>Instagram</span>
-                </div>
-                <div class="partner-logo">
-                    <i class="fab fa-tiktok"></i>
-                    <span>TikTok</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-company">
@@ -230,7 +258,7 @@
                         <span class="logo-subtitle">OPEN SOURCE INCUBATOR</span>
                     </div>
                     <p class="company-description">
-                        Leading open source project incubator transforming community innovations into commercial success.
+                        Leading open source project incubator transforming community innovations into commercial success while maintaining ethical standards and respecting creators.
                     </p>
                 </div>
                 
@@ -238,14 +266,21 @@
                     <div class="footer-section">
                         <h4>Company</h4>
                         <p>AIMORELOGY LIMITED</p>
+                        <p><small>Company Registration: Hong Kong</small></p>
                     </div>
                     
                     <div class="footer-section">
                         <h4>Contact</h4>
-                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@aimorelogy.com">info@aimorelogy.com</a></p>
-                        <p><i class="fas fa-map-marker-alt"></i> ROOM H2 4/F, CENTURY INDUSTRIAL CENTRE<br>
-                        33-35 AU PUI WAN STREET FOTAN<br>
-                        SHATIN, HONG KONG</p>
+                        <p>
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <a href="mailto:info@aimorelogy.com">info@aimorelogy.com</a>
+                        </p>
+                        <address>
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            ROOM H2 4/F, CENTURY INDUSTRIAL CENTRE<br>
+                            33-35 AU PUI WAN STREET FOTAN<br>
+                            SHATIN, HONG KONG
+                        </address>
                     </div>
                     
                     <div class="footer-section">
@@ -260,11 +295,42 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 AIMORELOGY LIMITED. All rights reserved.</p>
+                <p>&copy; 2025 AIMORELOGY LIMITED. All rights reserved. | Bridging Innovation to Market</p>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "AIMORELOGY LIMITED",
+        "description": "Leading open source project incubator based in Hong Kong",
+        "url": "https://aimorelogy.github.io",
+        "logo": "https://aimorelogy.github.io/logo.png",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ROOM H2 4/F, CENTURY INDUSTRIAL CENTRE, 33-35 AU PUI WAN STREET FOTAN",
+            "addressLocality": "SHATIN",
+            "addressRegion": "HONG KONG",
+            "addressCountry": "HK"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+852-XXXX-XXXX",
+            "contactType": "customer service",
+            "email": "info@aimorelogy.com"
+        },
+        "foundingDate": "2020",
+        "founder": {
+            "@type": "Organization",
+            "name": "AIMORELOGY LIMITED"
+        }
+    }
+    </script>
 </body>
 </html> 

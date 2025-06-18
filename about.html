@@ -3,14 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - AIMORELOGY</title>
+    <meta name="description" content="Learn about AIMORELOGY - Hong Kong's leading open source incubator. Our story, vision, and commitment to ethical innovation.">
+    <meta name="keywords" content="about AIMORELOGY, open source incubator, Hong Kong, company story, vision, innovation">
+    <meta name="author" content="AIMORELOGY LIMITED">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="About Us - AIMORELOGY">
+    <meta property="og:description" content="Discover our story, vision, and commitment to bridging open source innovation to market success">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimorelogy.github.io/about.html">
+    
+    <title>About Us - AIMORELOGY | Our Story & Vision</title>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#00ff88">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 </head>
 <body>
     <!-- Page Transition Overlay -->
-    <div class="page-transition">
+    <div class="page-transition" role="presentation" aria-hidden="true">
         <div class="transition-logo">
             <span class="logo-text">AIMORELOGY</span>
             <div class="loading-bar"></div>
@@ -18,212 +40,236 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <a href="index.html" class="nav-logo" aria-label="AIMORELOGY Home">
                 <span class="logo-text">AIMORELOGY</span>
                 <span class="logo-subtitle">OPEN SOURCE INCUBATOR</span>
             </a>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">Home</a>
+            
+            <ul class="nav-menu" role="menubar">
+                <li class="nav-item" role="none">
+                    <a href="index.html" class="nav-link" role="menuitem">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link active">About Us</a>
+                <li class="nav-item" role="none">
+                    <a href="about.html" class="nav-link active" role="menuitem" aria-current="page">About Us</a>
                 </li>
             </ul>
-            <div class="hamburger">
+            
+            <button class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 
-    <!-- About Hero Section -->
-    <section class="about-hero">
-        <div class="particles-container"></div>
-        <div class="container">
-            <div class="about-hero-content">
-                <h1 class="page-title">
-                    <span class="title-line">ABOUT</span>
-                    <span class="title-line highlight">AIMORELOGY</span>
-                </h1>
-                <p class="page-subtitle">Bridging the gap between open source innovation and commercial success</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Story Section -->
-    <section class="story-section">
-        <div class="container">
-            <div class="story-content">
-                <div class="story-text">
-                    <h2 class="section-title">Our Story</h2>
-                    <div class="story-paragraphs">
-                        <p>Founded in Hong Kong, AIMORELOGY LIMITED emerged from a vision to bridge the gap between brilliant open source innovations and commercial success. We recognized that many groundbreaking projects remained trapped in the community due to lack of market expertise and production knowledge.</p>
-                        
-                        <p>Our team combines deep technical understanding with proven market experience, creating a unique incubation environment where open source projects can flourish commercially while maintaining their community roots.</p>
-                        
-                        <p>What started as a passion project has evolved into a leading force in ethical technology commercialization, helping dozens of projects transition from community initiatives to market-ready products.</p>
-                    </div>
-                </div>
-                <div class="story-visual">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-year">2020</div>
-                            <div class="timeline-content">
-                                <h4>Foundation</h4>
-                                <p>AIMORELOGY LIMITED established in Hong Kong</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2021</div>
-                            <div class="timeline-content">
-                                <h4>First Success</h4>
-                                <p>Launched our first open source project to market</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2022</div>
-                            <div class="timeline-content">
-                                <h4>Global Partnerships</h4>
-                                <p>Established partnerships with major platforms</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2024</div>
-                            <div class="timeline-content">
-                                <h4>Industry Leader</h4>
-                                <p>Recognized as leading open source incubator</p>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Main Content -->
+    <main>
+        <!-- About Hero Section -->
+        <section class="about-hero" aria-labelledby="about-hero-title">
+            <div class="particles-container" aria-hidden="true"></div>
+            
+            <div class="container">
+                <div class="about-hero-content">
+                    <h1 id="about-hero-title" class="page-title">
+                        <span class="title-line">ABOUT</span>
+                        <span class="title-line highlight">AIMORELOGY</span>
+                    </h1>
+                    <p class="page-subtitle">Bridging the gap between open source innovation and commercial success through ethical practices and community-first approach</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Vision Section -->
-    <section class="vision-section">
-        <div class="container">
-            <div class="vision-content">
-                <div class="vision-visual">
-                    <div class="vision-graphic">
-                        <div class="vision-circle">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="vision-orbits">
-                            <div class="orbit orbit-1">
-                                <div class="orbit-item">
-                                    <i class="fab fa-github"></i>
-                                </div>
-                            </div>
-                            <div class="orbit orbit-2">
-                                <div class="orbit-item">
-                                    <i class="fas fa-rocket"></i>
-                                </div>
-                            </div>
-                            <div class="orbit orbit-3">
-                                <div class="orbit-item">
-                                    <i class="fas fa-globe"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="vision-text">
-                    <h2 class="section-title">Our Vision</h2>
-                    <div class="vision-paragraphs">
-                        <p>To become the global leader in ethical open source commercialization, creating a sustainable ecosystem where innovation thrives, creators are rewarded, and communities prosper.</p>
-                        
-                        <p>We envision a future where the best open source projects seamlessly transition to market success, generating value that flows back to support further innovation and community growth.</p>
-                        
-                        <p>Our mission extends beyond profit - we're building bridges between passionate developers and global markets, ensuring that groundbreaking innovations reach the people who need them most.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Company</h4>
-                            <p>AIMORELOGY LIMITED</p>
+        <!-- Our Story Section -->
+        <section class="story-section" aria-labelledby="story-title">
+            <div class="container">
+                <div class="story-content">
+                    <div class="story-text">
+                        <h2 id="story-title" class="section-title">Our Story</h2>
+                        <div class="story-paragraphs">
+                            <p>Founded in Hong Kong, AIMORELOGY LIMITED emerged from a vision to bridge the gap between brilliant open source innovations and commercial success. We recognized that many groundbreaking projects remained trapped in the community due to lack of market expertise and production knowledge.</p>
+                            
+                            <p>Our team combines deep technical understanding with proven market experience, creating a unique incubation environment where open source projects can flourish commercially while maintaining their community roots and ethical foundations.</p>
+                            
+                            <p>What started as a passion project has evolved into a leading force in ethical technology commercialization, helping dozens of projects transition from community initiatives to market-ready products that benefit both creators and users worldwide.</p>
                         </div>
                     </div>
                     
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p><a href="mailto:info@aimorelogy.com">info@aimorelogy.com</a></p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Address</h4>
-                            <p>ROOM H2 4/F, CENTURY INDUSTRIAL CENTRE<br>
-                               33-35 AU PUI WAN STREET FOTAN<br>
-                               SHATIN, HONG KONG</p>
+                    <div class="story-visual">
+                        <div class="timeline" role="img" aria-label="Company timeline showing key milestones from 2020 to 2024">
+                            <article class="timeline-item">
+                                <div class="timeline-year">2020</div>
+                                <div class="timeline-content">
+                                    <h4>Foundation</h4>
+                                    <p>AIMORELOGY LIMITED established in Hong Kong with a mission to bridge open source and commercial markets</p>
+                                </div>
+                            </article>
+                            
+                            <article class="timeline-item">
+                                <div class="timeline-year">2021</div>
+                                <div class="timeline-content">
+                                    <h4>First Success</h4>
+                                    <p>Successfully launched our first open source project to market, proving our incubation model</p>
+                                </div>
+                            </article>
+                            
+                            <article class="timeline-item">
+                                <div class="timeline-year">2022</div>
+                                <div class="timeline-content">
+                                    <h4>Global Partnerships</h4>
+                                    <p>Established strategic partnerships with major platforms and funding networks worldwide</p>
+                                </div>
+                            </article>
+                            
+                            <article class="timeline-item">
+                                <div class="timeline-year">2024</div>
+                                <div class="timeline-content">
+                                    <h4>Industry Leader</h4>
+                                    <p>Recognized as Hong Kong's leading open source incubator with proven track record</p>
+                                </div>
+                            </article>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section class="vision-section" aria-labelledby="vision-title">
+            <div class="container">
+                <div class="vision-content">
+                    <div class="vision-visual" aria-hidden="true">
+                        <div class="vision-graphic">
+                            <div class="vision-circle">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="vision-orbits">
+                                <div class="orbit orbit-1">
+                                    <div class="orbit-item">
+                                        <i class="fab fa-github"></i>
+                                    </div>
+                                </div>
+                                <div class="orbit orbit-2">
+                                    <div class="orbit-item">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                </div>
+                                <div class="orbit orbit-3">
+                                    <div class="orbit-item">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vision-text">
+                        <h2 id="vision-title" class="section-title">Our Vision</h2>
+                        <div class="vision-paragraphs">
+                            <p>To become the global leader in ethical open source commercialization, creating a sustainable ecosystem where innovation thrives, creators are rewarded, and communities prosper through collaborative excellence.</p>
+                            
+                            <p>We envision a future where the best open source projects seamlessly transition to market success, generating value that flows back to support further innovation and community growth, creating a virtuous cycle of technological advancement.</p>
+                            
+                            <p>Our mission extends beyond profit - we're building bridges between passionate developers and global markets, ensuring that groundbreaking innovations reach the people who need them most while maintaining the collaborative spirit of open source.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section" aria-labelledby="contact-title">
+            <div class="container">
+                <h2 id="contact-title" class="section-title">Get In Touch</h2>
                 
-                <div class="contact-form">
-                    <h3>Send us a message</h3>
-                    <form class="form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <article class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Company</h4>
+                                <p>AIMORELOGY LIMITED<br>
+                                <small>Registered in Hong Kong</small></p>
+                            </div>
+                        </article>
                         
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
+                        <article class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p><a href="mailto:info@aimorelogy.com">info@aimorelogy.com</a></p>
+                            </div>
+                        </article>
                         
-                        <div class="form-group">
-                            <label for="project">Project Type</label>
-                            <select id="project" name="project">
-                                <option value="">Select project type</option>
-                                <option value="hardware">Hardware Project</option>
-                                <option value="software">Software Project</option>
-                                <option value="iot">IoT Project</option>
-                                <option value="ai">AI/ML Project</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
+                        <article class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Address</h4>
+                                <address>
+                                    ROOM H2 4/F, CENTURY INDUSTRIAL CENTRE<br>
+                                    33-35 AU PUI WAN STREET FOTAN<br>
+                                    SHATIN, HONG KONG
+                                </address>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Send us a message</h3>
+                        <form class="form" novalidate aria-label="Contact form">
+                            <div class="form-group">
+                                <label for="name">Name <span aria-label="required">*</span></label>
+                                <input type="text" id="name" name="name" required aria-describedby="name-help">
+                                <div id="name-help" class="sr-only">Enter your full name</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email <span aria-label="required">*</span></label>
+                                <input type="email" id="email" name="email" required aria-describedby="email-help">
+                                <div id="email-help" class="sr-only">Enter a valid email address where we can reach you</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project">Project Type</label>
+                                <select id="project" name="project" aria-describedby="project-help">
+                                    <option value="">Select project type (optional)</option>
+                                    <option value="hardware">Hardware Project</option>
+                                    <option value="software">Software Project</option>
+                                    <option value="iot">IoT Project</option>
+                                    <option value="ai">AI/ML Project</option>
+                                    <option value="blockchain">Blockchain Project</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div id="project-help" class="sr-only">Optional: Select the type of project you'd like to discuss</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message <span aria-label="required">*</span></label>
+                                <textarea id="message" name="message" rows="5" required aria-describedby="message-help" placeholder="Tell us about your project or how we can help..."></textarea>
+                                <div id="message-help" class="sr-only">Describe your project or inquiry in detail (minimum 10 characters)</div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" aria-describedby="submit-help">
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                                Send Message
+                            </button>
+                            <div id="submit-help" class="sr-only">Submit your message to AIMORELOGY team</div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-company">
@@ -232,7 +278,7 @@
                         <span class="logo-subtitle">OPEN SOURCE INCUBATOR</span>
                     </div>
                     <p class="company-description">
-                        Leading open source project incubator transforming community innovations into commercial success.
+                        Leading open source project incubator transforming community innovations into commercial success while maintaining ethical standards and respecting creators.
                     </p>
                 </div>
                 
@@ -240,14 +286,21 @@
                     <div class="footer-section">
                         <h4>Company</h4>
                         <p>AIMORELOGY LIMITED</p>
+                        <p><small>Company Registration: Hong Kong</small></p>
                     </div>
                     
                     <div class="footer-section">
                         <h4>Contact</h4>
-                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@aimorelogy.com">info@aimorelogy.com</a></p>
-                        <p><i class="fas fa-map-marker-alt"></i> ROOM H2 4/F, CENTURY INDUSTRIAL CENTRE<br>
-                        33-35 AU PUI WAN STREET FOTAN<br>
-                        SHATIN, HONG KONG</p>
+                        <p>
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <a href="mailto:info@aimorelogy.com">info@aimorelogy.com</a>
+                        </p>
+                        <address>
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            ROOM H2 4/F, CENTURY INDUSTRIAL CENTRE<br>
+                            33-35 AU PUI WAN STREET FOTAN<br>
+                            SHATIN, HONG KONG
+                        </address>
                     </div>
                     
                     <div class="footer-section">
@@ -255,19 +308,51 @@
                         <ul class="footer-links">
                             <li><a href="index.html">Home</a></li>
                             <li><a href="about.html">About Us</a></li>
-                            <li><a href="about.html#contact">Contact</a></li>
+                            <li><a href="#contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 AIMORELOGY LIMITED. All rights reserved.</p>
+                <p>&copy; 2025 AIMORELOGY LIMITED. All rights reserved. | Bridging Innovation to Market</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
     <script src="script.js"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "AIMORELOGY LIMITED",
+            "description": "Leading open source project incubator based in Hong Kong",
+            "url": "https://aimorelogy.github.io",
+            "foundingDate": "2020",
+            "foundingLocation": {
+                "@type": "Place",
+                "name": "Hong Kong"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ROOM H2 4/F, CENTURY INDUSTRIAL CENTRE, 33-35 AU PUI WAN STREET FOTAN",
+                "addressLocality": "SHATIN",
+                "addressRegion": "HONG KONG",
+                "addressCountry": "HK"
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "info@aimorelogy.com"
+            }
+        }
+    }
+    </script>
 </body>
 </html>
