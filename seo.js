@@ -3,7 +3,7 @@
     siteName: 'AIMORELOGY - Open Source Incubator',
     siteUrl: 'https://aimorelogy.com',
     description: 'Leading open source project incubator transforming open source innovations into market success while respecting creators.',
-    image: '/static/logo.png',
+    image: '/static/logo-1.png',
     themeColor: '#00ff88',
     twitterCard: 'summary_large_image'
   };
